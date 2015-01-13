@@ -1,0 +1,87 @@
+\documentclass[12pt,a4paper,notitlepage]{report}
+\usepackage{fullpage}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage[overlay]{textpos}
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{xfrac}
+\usepackage{textcomp}
+\usepackage[hidelinks,colorlinks,urlcolor=blue]{hyperref}
+
+%% Use fancyhdr to get our desired headers and footers
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}% removes header line
+\fancypagestyle{plain}{% for chapter starting pages
+  \fancyhf{}% clears header fields
+  \rfoot{\hyperlink{contents}{Return to contents}}}
+
+%% Setup footer for all other pages
+\fancyhf{}%clear all fields
+\rfoot{\hyperlink{contents}{Return to contents}}% links the TOC at the center of the page footer
+\cfoot{\thepage\ of \pageref*{LastPage}}
+\lfoot{\leftmark}
+\renewcommand{\chaptermark}[1]{%
+  \markboth{#1}{}}
+
+%%TOC Hyperlink Setup
+
+
+%%Document start
+\begin{document}
+
+%% Macros Section
+\newcommand{\newrecipe}[2] {%parameter1 is the recipe name parameter 2 is the hyperlink to original content (if applicable).
+	\newpage
+	\phantomsection
+	\addcontentsline{toc}{section}{#1}
+	\section*{
+	\center {\Huge \href{#2}{#1}}
+%	\centerline {\Huge \href{#2}{#1}}
+	}
+}
+
+%%List Style Setup
+\newenvironment{ingredients-list}{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{
+  \end{itemize}
+}
+
+
+%%Title Page
+\title{Tried and Tested}
+\date{}
+\author{}
+\maketitle
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=1]{./img/recipe-book.jpg}
+\end{figure}
+\thispagestyle{empty}
+\newpage
+
+%%TOC page(s)
+\hypertarget{contents}{}%Navigation target to return to Toc from any page
+\hypersetup{
+  colorlinks,
+  linkcolor=blue,
+  linktoc=all
+}
+\tableofcontents
+
+\include{fingerfood}
+\include{brunch}
+\include{mains}
+\include{vegetarianmains}
+\include{salads}
+\include{dips_extras}
+\include{desserts}
+\include{sides_extras}
+\include{sauces_dressings}
+
+%%The end
+\end{document}
